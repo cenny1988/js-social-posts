@@ -60,15 +60,27 @@ for (i=0; i<posts.length; i++){
     containerPosts.append(newPost);
 }
 
+//aggiungiamo evento al button like
+//riferimenti al BTN
+const btn = document.getElementsByClassName('like-button js-like-button');
+console.log(btn);
+//const btnTarget = document.getElementsByClassName('like-button js-like-button')[i];
+//console.log(btnTarget);
+// let likesCounter = document.getElementById(`like-counter-0`);
+// console.log(likesCounter.innerHTML)
+
+for (i=0; i<btn.length; i++){
+    let likesCounter = document.getElementById(`like-counter-${i}`);
+    btn[i].addEventListener('click',
+        console.log(likesCounter.innerHTML)
+    );
+}
 
 //funzioni
 function addNewPost(i){
     //creamo un nuovo div e aggiungiamo la classe post
     const divPost = document.createElement('div');
     divPost.classList.add('post');
-
-    //riferimenti al BTN
-    //const btn = document
     
     //creo un obj e lo destrutturo così da poter copiare i valori delle prop in newPost!
     const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
@@ -99,16 +111,12 @@ function addNewPost(i){
                             </a>
                         </div>
                         <div class="likes__counter">
-                            Piace a <b id="like-counter-1" class="js-likes-counter">${likes}</b> persone
+                            Piace a <b id="like-counter-${i}" class="js-likes-counter">${likes}</b> persone
                         </div>
                     </div> 
                 </div>            
     `;
     // infine copiamo il contenuto nella pagina
     divPost.innerHTML = newPost;
-
-    //aggiungiamo evento al button like
-    
-
     return divPost
 }
