@@ -44,7 +44,6 @@ const posts = [
 ];
 
 
-// stampiamo i post del nostro feed. --> proviamo prima 1 stampa singola.
 const containerPosts = document.getElementById('container');
 
 //creamo un for lungo come tutti i posts così da inserirli tutti nella pagina!
@@ -57,8 +56,7 @@ for (i=0; i<posts.length; i++){
     const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
     
     //poi al suo interno tramite innerHTML copiamo tutta la struttura
-    let newPost = '';
-    newPost = `
+    let newPost = `
                 <div class="post__header">
                     <div class="post-meta">                    
                         <div class="post-meta__icon">
@@ -88,6 +86,7 @@ for (i=0; i<posts.length; i++){
                     </div> 
                 </div>            
     `;
+
     // infine copiamo il contenuto nella pagina
     divPost.innerHTML = newPost;
     containerPosts.append(divPost);
