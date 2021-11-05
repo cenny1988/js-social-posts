@@ -53,70 +53,69 @@ const posts = [
 
 
 const containerPosts = document.getElementById('container');
+addNewPost();
 
-//creamo un for lungo come tutti i posts così da inserirli tutti nella pagina!
-for (i=0; i<posts.length; i++){
-    let newPost = addNewPost(i);
-    containerPosts.append(newPost);
-}
 
 //aggiungiamo evento al button like
-//riferimenti al BTN
-const btn = document.getElementsByClassName('like-button js-like-button');
-console.log(btn);
-//const btnTarget = document.getElementsByClassName('like-button js-like-button')[i];
-//console.log(btnTarget);
-// let likesCounter = document.getElementById(`like-counter-0`);
-// console.log(likesCounter.innerHTML)
+//riferimenti ai BTN --> creamo un array con tutti i buttons che hanno la classe 'like-button js-like-button'
+const buttons = document.getElementsByClassName('like-button js-like-button');
+const bCounters = document.getElementsByClassName('js-likes-counter');
 
-for (i=0; i<btn.length; i++){
-    let likesCounter = document.getElementById(`like-counter-${i}`);
-    btn[i].addEventListener('click',
-        console.log(likesCounter.innerHTML)
+for (i=0; i<buttons.length; i++){
+    buttons[i].addEventListener('click',
+    function(){
+        const index = this.getAttribute('data-postid');
+        console.log(index);
+        posts[index].bCounters++;
+        addNewPost();        
+        }
     );
 }
 
 //funzioni
-function addNewPost(i){
-    //creamo un nuovo div e aggiungiamo la classe post
-    const divPost = document.createElement('div');
-    divPost.classList.add('post');
-    
-    //creo un obj e lo destrutturo così da poter copiare i valori delle prop in newPost!
-    const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
-    
-    //poi al suo interno tramite innerHTML copiamo tutta la struttura
-    let newPost = `
-                <div class="post__header">
-                    <div class="post-meta">                    
-                        <div class="post-meta__icon">
-                            <img class="profile-pic" src="${imgProfile}" alt="${author}">                    
+function addNewPost(){
+    //creamo un for lungo come tutti i posts così da inserirli tutti nella pagina!
+    for (i=0; i<posts.length; i++){
+        //creamo un nuovo div e aggiungiamo la classe post
+        const divPost = document.createElement('div');
+        divPost.classList.add('post');
+        
+        //creo un obj e lo destrutturo così da poter copiare i valori delle prop in newPost!
+        const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
+        
+        //poi al suo interno tramite innerHTML copiamo tutta la struttura
+        let newPost = `
+                    <div class="post__header">
+                        <div class="post-meta">                    
+                            <div class="post-meta__icon">
+                                <img class="profile-pic" src="${imgProfile}" alt="${author}">                    
+                            </div>
+                            <div class="post-meta__data">
+                                <div class="post-meta__author">${author}</div>
+                                <div class="post-meta__time">${date}</div>
+                            </div>                    
                         </div>
-                        <div class="post-meta__data">
-                            <div class="post-meta__author">${author}</div>
-                            <div class="post-meta__time">${date}</div>
-                        </div>                    
                     </div>
-                </div>
-                <div class="post__text">${postText}</div>
-                <div class="post__image">
-                    <img src="${imgPost}" alt="">
-                </div>
-                <div class="post__footer">
-                    <div class="likes js-likes">
-                        <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="${i}">
-                                <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
-                                <span class="like-button__label">Mi Piace</span>
-                            </a>
-                        </div>
-                        <div class="likes__counter">
-                            Piace a <b id="like-counter-${i}" class="js-likes-counter">${likes}</b> persone
-                        </div>
-                    </div> 
-                </div>            
-    `;
-    // infine copiamo il contenuto nella pagina
-    divPost.innerHTML = newPost;
-    return divPost
+                    <div class="post__text">${postText}</div>
+                    <div class="post__image">
+                        <img src="${imgPost}" alt="">
+                    </div>
+                    <div class="post__footer">
+                        <div class="likes js-likes">
+                            <div class="likes__cta">
+                                <a class="like-button  js-like-button" href="#" data-postid="${i}">
+                                    <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                                    <span class="like-button__label">Mi Piace</span>
+                                </a>
+                            </div>
+                            <div class="likes__counter">
+                                Piace a <b id="like-counter-${i}" class="js-likes-counter">${likes}</b> persone
+                            </div>
+                        </div> 
+                    </div>            
+        `;
+        // infine copiamo il contenuto nella pagina
+        divPost.innerHTML = newPost;
+        containerPosts.append(divPost);
+    }
 }
