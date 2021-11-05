@@ -18,6 +18,14 @@ Per le immagini va bene utilizzare qualsiasi servizio di placeholder ad es. Unsp
 
 const posts = [
     {
+        "imgProfile": 'https://unsplash.it/300/300?image=15',
+        "author": 'Phil Mangione',
+        "date": '4 mesi fa',
+        "postText": 'Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.',
+        "imgPost": 'https://unsplash.it/600/300?image=171',
+        "likes": 80
+    },
+    {
         "imgProfile": 'https://picsum.photos/60?random=1',
         "author": 'Fusco Gennaro',
         "date": '4 mesi fa',
@@ -48,9 +56,19 @@ const containerPosts = document.getElementById('container');
 
 //creamo un for lungo come tutti i posts così da inserirli tutti nella pagina!
 for (i=0; i<posts.length; i++){
+    let newPost = addNewPost(i);
+    containerPosts.append(newPost);
+}
+
+
+//funzioni
+function addNewPost(i){
     //creamo un nuovo div e aggiungiamo la classe post
     const divPost = document.createElement('div');
     divPost.classList.add('post');
+
+    //riferimenti al BTN
+    //const btn = document
     
     //creo un obj e lo destrutturo così da poter copiare i valori delle prop in newPost!
     const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
@@ -75,7 +93,7 @@ for (i=0; i<posts.length; i++){
                 <div class="post__footer">
                     <div class="likes js-likes">
                         <div class="likes__cta">
-                            <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <a class="like-button  js-like-button" href="#" data-postid="${i}">
                                 <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                                 <span class="like-button__label">Mi Piace</span>
                             </a>
@@ -86,9 +104,11 @@ for (i=0; i<posts.length; i++){
                     </div> 
                 </div>            
     `;
-
     // infine copiamo il contenuto nella pagina
     divPost.innerHTML = newPost;
-    containerPosts.append(divPost);
-}
 
+    //aggiungiamo evento al button like
+    
+
+    return divPost
+}
