@@ -64,10 +64,15 @@ const bCounters = document.getElementsByClassName('js-likes-counter');
 for (i=0; i<buttons.length; i++){
     buttons[i].addEventListener('click',
     function(){
-        const index = this.getAttribute('data-postid');
-        console.log(index);
-        posts[index].bCounters++;
-        addNewPost();        
+        const index = this.getAttribute('data-postid');// copia in index valore id btn
+        console.log('bold: ', bCounters[index].innerHTML);// contenuto di bold(likes)dello stesso post
+        console.log('data-postid: ', index);
+
+        posts[index].likes++;// incremento i likes del rispetivo post
+        console.log(posts[index].likes);
+
+        //bCounters[index].innerHTML = posts[index].likes;         
+        //addNewPost();        
         }
     );
 }
