@@ -71,14 +71,15 @@ for (i=0; i<buttons.length; i++){
         posts[index].likes++;// incremento i likes del rispetivo post
         console.log(posts[index].likes);
 
-        //bCounters[index].innerHTML = posts[index].likes;         
-        //addNewPost();        
+        document.getElementById('container').innerHTML = '';   
+        addNewPost();        
         }
     );
 }
 
 //funzioni
 function addNewPost(){
+    let newPost = '';
     //creamo un for lungo come tutti i posts così da inserirli tutti nella pagina!
     for (i=0; i<posts.length; i++){
         //creamo un nuovo div e aggiungiamo la classe post
@@ -89,7 +90,7 @@ function addNewPost(){
         const {imgProfile, author, date, postText, imgPost, likes} = posts[i];
         
         //poi al suo interno tramite innerHTML copiamo tutta la struttura
-        let newPost = `
+        newPost = `
                     <div class="post__header">
                         <div class="post-meta">                    
                             <div class="post-meta__icon">
